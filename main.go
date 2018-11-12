@@ -7,9 +7,18 @@ import (
 
 func main() {
 	fmt.Println("Hello world.")
-	db := database.InitDB("map")
-	db.NewChunk(1, 1)	
-	// fmt.Println(db.FindChunk(1, 1))
+	db, err := database.InitDB("map")
+	if err != nil {
+		fmt.Println(err)
+	}
+	newChuckErr := db.NewChunk(1, 1)
+	if newChuckErr != nil {
+		fmt.Println(err)
+	}
+	deleteChunkErr := db.DeleteChunk(1, 1)
+	if deleteChunkErr != nil {
+		fmt.Println(deleteChunkErr)
+	}
 	/*
 	db, err := leveldb.OpenFile("./dbtest", nil)
 	if err != nil {
